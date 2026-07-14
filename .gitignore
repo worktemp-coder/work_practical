@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Secrets - do not commit
+.env
+*.pem
+*.key
+apikey.txt
+
+# Generated reports
+trivy-report.json
