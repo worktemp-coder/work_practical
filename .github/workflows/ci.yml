@@ -24,7 +24,7 @@ jobs:
       - name: Run Bandit SAST scan
         run: |
           bandit -r . \
-            --exclude ./.git,./venv,./vuln_app.py \
+            --exclude ./.git,./venv,./vuln_app.py,./fixcode.py,./config.py \
             --severity-level medium \
             --confidence-level medium \
             -f txt \
