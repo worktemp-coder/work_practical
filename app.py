@@ -16,7 +16,38 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
  
 app = Flask(__name__)
- 
+@app.after_request
+def add_security_headers(response):
+    # Prevent MIME type sniffing
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+
+    # Prevent clickjacking
+    response.headers['X-Frame-Options'] = 'DENY'
+
+    # Enable XSS filter in older browsers
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+
+    # Control referrer information
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+
+    # Prevent server version disclosure
+    response.headers['Server'] = 'webserver'
+
+    # Content Security Policy — restrict resource loading
+    response.headers['Content-Security-Policy'] = (
+        "default-src 'self'; "
+        "script-src 'self'; "
+        "style-src 'self'; "
+        "img-src 'self' data:; "
+        "font-src 'self'; "
+        "object-src 'none'; "
+        "frame-ancestors 'none'"
+    )
+    
+    # HTTPS only — tell browsers to always use HTTPS
+    # Only enable in production with HTTPS
+    # response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    return response
  
 @app.route('/health')
 def health():
