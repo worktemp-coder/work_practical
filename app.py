@@ -44,7 +44,7 @@ def add_security_headers(response):
         "frame-ancestors 'none'"
     )
     
-    # HTTPS only — tell browsers to always use HTTPS
+    # HTTPS only — tell browsers to always use HTTPS  #add
     # Only enable in production with HTTPS
     # response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
     return response
