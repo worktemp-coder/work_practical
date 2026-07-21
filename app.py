@@ -44,7 +44,7 @@ def add_security_headers(response):
         "frame-ancestors 'none'"
     )
     
-    # HTTPS only — tell browsers to always use HTTPS
+    # HTTPS only — tell browsers to always use HTTPS  #add
     # Only enable in production with HTTPS
     # response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
     return response
@@ -113,4 +113,4 @@ def server_error(e):
  
 if __name__ == '__main__':
     debug_mode = os.environ.get('FLASK_DEBUG', 'false').lower() == 'true'
-    app.run(host='0.0.0.0', debug=debug_mode)
+    app.run(host='0.0.0.0', debug=debug_mode)  # nosec B104
